@@ -10,6 +10,7 @@ const chefButton = document.getElementById('chef-button');
 const dinerList = document.getElementById('diner-list');
 const addDinerForm = document.getElementById('add-diner-form');
 const removeDinersButton = document.getElementById('remove-diners-button');
+const shiftDisplay = document.getElementById('shift-display');
 
 /* State */
 let message = 'Make some food to get started';
@@ -19,6 +20,7 @@ let diners = [
     { name: 'Bill', drink: 'milkshake', food: 'burger', hasDrink: false, hasFood: false },
     { name: 'Sara', drink: 'milkshake', food: 'pizza', hasDrink: false, hasFood: false },
 ];
+let shifts = 9;
 
 // probability arrays
 const coke = { type: 'drink', name: 'coke' };
@@ -33,6 +35,12 @@ const dinerFoods = [burger, burger, burger, pizza, pizza];
 
 /* Events */
 chefButton.addEventListener('click', () => {
+    if (shifts < 1) {
+        message = 'So sorry, go home and get some rest';
+        displayMessage();
+        return;
+    }
+
     // get a random number of food items
     const howMany = getRandomItem(numOfFoods);
 
@@ -48,9 +56,11 @@ chefButton.addEventListener('click', () => {
         //      push into foods array
         foods.push(food);
     }
-    // display a message of how many foods
-    // redisplay foods
+
+    shifts--;
+
     displayFood();
+    displayChef();
 });
 
 addDinerForm.addEventListener('submit', (e) => {
@@ -92,6 +102,10 @@ removeDinersButton.addEventListener('click', () => {
 /* Display Functions */
 function displayMessage() {
     messageSection.textContent = message;
+}
+
+function displayChef() {
+    shiftDisplay.textContent = shifts;
 }
 
 function displayFood() {
@@ -170,5 +184,6 @@ function displayDiners() {
 }
 
 displayMessage();
+displayChef();
 displayFood();
 displayDiners();
