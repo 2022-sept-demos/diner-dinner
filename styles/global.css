@@ -33,3 +33,13 @@ header .logo {
 main {
     padding: 20px;
 }
+
+footer {
+    padding: 5px;
+    text-align: right;
+}
+
+footer a {
+    font-size: 0.8em;
+    color: olive;
+}

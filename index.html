@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- title and favicon -->
-    <title>Web App</title>
+    <title>Diner Dinner</title>
     <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
 
     <!-- js -->
@@ -21,18 +21,71 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/global.css" />
     <!-- add link for page specific css -->
+    <link rel="stylesheet" href="styles/diner-dinner.css" />
 
 </head>
 
 <body>
     <header>
-        <img class="logo" src="assets/html_css_js.png" alt="logo">
-        <h1>Web App</h1>
+        <img class="logo" src="assets/chef.png" alt="logo">
+        <h1>Diner Dinner</h1>
     </header>
 
     <main>
+        <section id="message-section">
+            Messages Go Here
+        </section>
 
+        <div class="game-area">
+            <section>
+                <button id="chef-button">
+                    <img src="assets/chef.png" alt="chef">
+                    Make Food
+                </button>
+            </section>
+
+            <section id="food-section">
+                <img src="assets/burger.png" alt="burger">
+                <img src="assets/pizza.png" alt="pizza">
+                <img src="assets/coke.png" alt="coke">
+                <img src="assets/milkshake.png" alt="milkshake">
+            </section>
+
+            <section>
+                <form>
+                    <input>
+                    <button>Add Diner</button>
+                </form>
+
+                <ul id="friend-list">
+                    <li>
+                        <span>😒 Alice</span>
+                        <img src="assets/burger.png" alt="burger">
+                        <img src="assets/coke.png" alt="coke">
+                    </li>
+
+                    <li>
+                        <span>😐 Ted</span>
+                        <img src="assets/burger.png" alt="burger">
+                        <img src="assets/milkshake.png" alt="milkshake">
+                    </li>
+
+                    <li>
+                        <span>😋 Sara</span>
+                        <img src="assets/pizza.png" alt="pizza">
+                        <img src="assets/milkshake.png" alt="milkshake">
+                    </li>
+                </ul>
+
+                <button id="remove-button">Remove fed diners</button>
+            </section>
+        </div>
     </main>
+
+    <footer>
+        <a href="https://www.flaticon.com/free-icons/cooking" title="cooking icons">Cooking icons created by Freepik -
+            Flaticon</a>
+    </footer>
 
 </body>
 
