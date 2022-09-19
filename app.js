@@ -8,6 +8,8 @@ const messageSection = document.getElementById('message-section');
 const foodSection = document.getElementById('food-section');
 const chefButton = document.getElementById('chef-button');
 const dinerList = document.getElementById('diner-list');
+const addDinerForm = document.getElementById('add-diner-form');
+const removeDinersButton = document.getElementById('remove-diners-button');
 
 /* State */
 let message = 'Make some food to get started';
@@ -26,6 +28,8 @@ const pizza = { type: 'food', name: 'pizza' };
 
 const numOfFoods = [0, 1, 1, 1, 2, 2, 3];
 const foodTypes = [coke, coke, coke, burger, burger, pizza, pizza, milkshake];
+const dinerDrinks = [coke, coke, milkshake];
+const dinerFoods = [burger, burger, burger, pizza, pizza];
 
 /* Events */
 chefButton.addEventListener('click', () => {
@@ -47,6 +51,42 @@ chefButton.addEventListener('click', () => {
     // display a message of how many foods
     // redisplay foods
     displayFood();
+});
+
+addDinerForm.addEventListener('submit', (e) => {
+    // stop the form from re-posting to the same browser page
+    e.preventDefault();
+    // use a form data object
+    const formData = new FormData(addDinerForm);
+    // make a new diner object:
+    const diner = {
+        name: formData.get('name'),
+        drink: getRandomItem(dinerDrinks).name,
+        food: getRandomItem(dinerFoods).name,
+        hasDrink: false,
+        hasFood: false,
+    };
+
+    diners.push(diner);
+    message = `${diner.name} has been sat at a table and wants ${diner.drink} and ${diner.food}.`;
+    addDinerForm.reset();
+
+    displayDiners();
+    displayMessage();
+});
+
+removeDinersButton.addEventListener('click', () => {
+    const unfedDiners = [];
+
+    for (const diner of diners) {
+        if (!diner.hasDrink || !diner.hasFood) {
+            unfedDiners.push(diner);
+        }
+    }
+
+    diners = unfedDiners;
+
+    displayDiners();
 });
 
 /* Display Functions */

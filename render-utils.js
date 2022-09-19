@@ -21,14 +21,14 @@ export function renderDiner(diner) {
     const name = document.createElement('span');
     name.textContent = diner.name;
 
-    const foodImage = document.createElement('img');
-    foodImage.src = `assets/${diner.food}.png`;
-    foodImage.alt = diner.food;
-
     const drinkImage = document.createElement('img');
     drinkImage.src = `assets/${diner.drink}.png`;
     drinkImage.alt = diner.drink;
 
-    li.append(emoji, name, foodImage, drinkImage);
+    const foodImage = document.createElement('img');
+    foodImage.src = `assets/${diner.food}.png`;
+    foodImage.alt = diner.food;
+
+    li.append(emoji, name, drinkImage, foodImage);
     return li;
 }
