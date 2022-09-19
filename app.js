@@ -10,13 +10,12 @@ const chefButton = document.getElementById('chef-button');
 const dinerList = document.getElementById('diner-list');
 
 /* State */
-let message = 'Alice is full';
+let message = 'Make some food to get started';
 let foods = [];
 let diners = [
     { name: 'Alice', drink: 'coke', food: 'pizza', hasDrink: false, hasFood: false },
-    { name: 'Ted', drink: 'coke', food: 'burger', hasDrink: true, hasFood: false },
-    { name: 'Bill', drink: 'milkshake', food: 'burger', hasDrink: true, hasFood: true },
-    { name: 'Sara', drink: 'milkshake', food: 'pizza', hasDrink: true, hasFood: true },
+    { name: 'Bill', drink: 'milkshake', food: 'burger', hasDrink: false, hasFood: false },
+    { name: 'Sara', drink: 'milkshake', food: 'pizza', hasDrink: false, hasFood: false },
 ];
 
 // probability arrays
@@ -70,6 +69,63 @@ function displayDiners() {
     for (const diner of diners) {
         const dinerEl = renderDiner(diner);
         dinerList.append(dinerEl);
+
+        dinerEl.addEventListener('click', () => {
+            // diner has full order - message to feed someone else
+            if (diner.hasDrink && diner.hasFood) {
+                message = `${diner.name} has their full order, pick someone else!`;
+            } else {
+                // diner needs food or drink
+                let drink = null;
+                // look for diner drink
+                for (const drinkCandidate of foods) {
+                    // Does this food (drinkCandidate) match what the diner wants to drink?
+                    if (drinkCandidate.name === diner.drink) {
+                        // yes! store it and stop looping
+                        drink = drinkCandidate;
+                        break;
+                    }
+                    // no, keep looping
+                }
+
+                message = '';
+
+                // either we have a "drink" or drink is still null
+                if (drink) {
+                    // get the index of this drink
+                    const index = foods.indexOf(drink);
+                    // remove it from the array
+                    foods.splice(index, 1);
+                    diner.hasDrink = true;
+                    message += `${diner.name} was served a ${drink.name}. `;
+                } else {
+                    message += `Chef needs to make some ${diner.drink}. `;
+                }
+
+                let food = null;
+
+                for (const foodCandidate of foods) {
+                    if (foodCandidate.name === diner.food) {
+                        food = foodCandidate;
+                        break;
+                    }
+                }
+
+                if (food) {
+                    const index = foods.indexOf(food);
+                    foods.splice(index, 1);
+                    diner.hasFood = true;
+                    message += `${diner.name} was served a ${food.name}.`;
+                } else {
+                    message += `Chef needs to make a ${diner.food}.`;
+                }
+            }
+
+            // redisplay
+            displayMessage();
+            displayFood();
+            displayDiners();
+        });
     }
 }
 
