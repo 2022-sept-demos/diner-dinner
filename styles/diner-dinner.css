@@ -34,13 +34,13 @@
     width: 50px;
 }
 
-#friend-list {
+#diner-list {
     width: 100%;
     // display: grid;
     // gap: 10px;
 }
 
-#friend-list li {
+#diner-list li {
     padding: 5px 10px;
     font-size: 2em;
     background: white;
@@ -50,7 +50,7 @@
     justify-content: space-between;
 }
 
-#friend-list li img {
+#diner-list li img {
     width: 20px;
     height: 20px;
 }

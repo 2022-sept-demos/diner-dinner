@@ -1,16 +1,23 @@
 /* Imports */
 
-import { renderFood } from './render-utils.js';
+import { renderDiner, renderFood } from './render-utils.js';
 import { getRandomItem } from './utils.js';
 
 /* Get DOM Elements */
 const messageSection = document.getElementById('message-section');
 const foodSection = document.getElementById('food-section');
 const chefButton = document.getElementById('chef-button');
+const dinerList = document.getElementById('diner-list');
 
 /* State */
 let message = 'Alice is full';
 let foods = [];
+let diners = [
+    { name: 'Alice', drink: 'coke', food: 'pizza', hasDrink: false, hasFood: false },
+    { name: 'Ted', drink: 'coke', food: 'burger', hasDrink: true, hasFood: false },
+    { name: 'Bill', drink: 'milkshake', food: 'burger', hasDrink: true, hasFood: true },
+    { name: 'Sara', drink: 'milkshake', food: 'pizza', hasDrink: true, hasFood: true },
+];
 
 // probability arrays
 const coke = { type: 'drink', name: 'coke' };
@@ -57,5 +64,15 @@ function displayFood() {
     }
 }
 
+function displayDiners() {
+    dinerList.innerHTML = '';
+
+    for (const diner of diners) {
+        const dinerEl = renderDiner(diner);
+        dinerList.append(dinerEl);
+    }
+}
+
 displayMessage();
 displayFood();
+displayDiners();
